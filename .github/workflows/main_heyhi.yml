@@ -14,49 +14,71 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
+      - name: Install server dependencies
         run: |
+          cd heyhi-life/server
           npm install
-          npm run build --if-present
-          npm run test --if-present
 
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+      - name: Install client dependencies
+        run: |
+          cd heyhi-life/client
+          npm install
 
-      - name: Upload artifact for deployment job
+      - name: Build the React application
+        run: |
+          cd heyhi-life/client
+          npm run build
+
+      - name: Archive build artifacts
+        run: |
+          cd heyhi-life
+          mkdir -p build
+          mv client/build server/build
+          cd server
+          zip -r ../release.zip .
+        shell: bash
+
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: release.zip
+          path: heyhi-life/release.zip
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write
 
     steps:
-      - name: Download artifact from build job
+      - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
           name: node-app
 
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
+      - name: Unzip build artifacts
+        run: unzip heyhi-life/release.zip -d release
 
-      - name: 'Deploy to Azure Web App'
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'heyhi'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B5E1E2A9E4CD491E842030ABF739528F }}
-          package: .
+          app-name: 'heyhi-life-app'
+          slot-name: 'production'
+          package: release
