@@ -11,7 +11,8 @@ env:
   NODE_VERSION: '18.x'                # set this to the node version to use
 
 permissions:
-  contents: write
+  id-token: write
+  contents: read
 
 jobs:
   build:
@@ -79,12 +80,12 @@ jobs:
     - name: Unzip build artifacts
       run: unzip release.zip -d release
 
-    - name: Azure Login and Deploy to Azure WebApp
-      uses: azure/login@v1
+    - name: Azure login
+      uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
 
     - name: 'Deploy to Azure WebApp'
