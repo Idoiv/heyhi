@@ -8,6 +8,16 @@
     color: #343a40;
 }
 
+.tools-page .search-bar {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 20px auto;
+    display: block;
+}
+
 .tools-page .row {
     display: flex;
     justify-content: space-around;

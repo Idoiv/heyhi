@@ -5,7 +5,7 @@ require('dotenv').config();
 const app = express();
 
 // Connect to database
-//connectDB();
+connectDB();
 
 // Init Middleware
 app.use(express.json({ extended: false }));

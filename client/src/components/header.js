@@ -8,7 +8,7 @@ const Header = () => {
             <Navbar.Brand as={Link} to="/">AI Tools Hub</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
+                <Nav className="me-auto">
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="/tools">Tools</Nav.Link>
                     {/* Add other links as needed */}
