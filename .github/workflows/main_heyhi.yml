@@ -7,7 +7,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: heyhi-life-app    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: 'server'  # set this to the path to your web app project
+  AZURE_WEBAPP_PACKAGE_PATH: 'server/release.zip'  # set this to the path to your web app project
   NODE_VERSION: '18.x'                # set this to the node version to use
 
 permissions:
@@ -78,7 +78,7 @@ jobs:
         name: node-app
 
     - name: Unzip build artifacts
-      run: unzip release.zip -d release
+      run: unzip server/release.zip -d release
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
