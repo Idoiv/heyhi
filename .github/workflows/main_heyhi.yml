@@ -26,28 +26,31 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
 
-    - name: Install server dependencies
+    - name: Check for server lock file
       run: |
-        npm install
+        if [ ! -f server/package-lock.json ]; then echo "Lock file not found in server directory"; exit 1; fi
+
+    - name: Check for client lock file
+      run: |
+        if [ ! -f client/package-lock.json ]; then echo "Lock file not found in client directory"; exit 1; fi
+
+    - name: Install server dependencies
+      run: npm install
       working-directory: server
 
     - name: Install client dependencies
-      run: |
-        npm install
+      run: npm install
       working-directory: client
 
     - name: Build the React application
-      run: |
-        npm run build
+      run: npm run build
       working-directory: client
 
     - name: Move build artifacts
-      run: |
-        mv client/build server/build
+      run: mv client/build server/build
 
     - name: Archive build artifacts
-      run: |
-        zip -r release.zip .
+      run: zip -r release.zip .
       working-directory: server
 
     - name: Upload artifact for deployment job
