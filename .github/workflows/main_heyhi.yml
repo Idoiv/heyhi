@@ -45,6 +45,8 @@ jobs:
     - name: Build the React application
       run: npm run build
       working-directory: client
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
 
     - name: Move build artifacts
       run: mv client/build server/build
@@ -65,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: production
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
