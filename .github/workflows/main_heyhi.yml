@@ -26,7 +26,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: heyhi-life-app    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: 'heyhi-life/server'  # set this to the path to your web app project
+  AZURE_WEBAPP_PACKAGE_PATH: 'server'  # set this to the path to your web app project
   NODE_VERSION: '18.x'                # set this to the node version to use
 
 permissions:
@@ -47,33 +47,33 @@ jobs:
 
     - name: Install server dependencies
       run: |
-        cd heyhi-life/server
+        cd server
         npm install
 
     - name: Install client dependencies
       run: |
-        cd heyhi-life/client
+        cd client
         npm install
 
     - name: Build the React application
       run: |
-        cd heyhi-life/client
+        cd client
         npm run build
 
     - name: Move build artifacts
       run: |
-        mv heyhi-life/client/build heyhi-life/server/build
+        mv client/build server/build
 
     - name: Archive build artifacts
       run: |
-        cd heyhi-life/server
+        cd server
         zip -r ../release.zip .
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
         name: node-app
-        path: heyhi-life/release.zip
+        path: release.zip
 
   deploy:
     permissions:
@@ -91,7 +91,7 @@ jobs:
         name: node-app
 
     - name: Unzip build artifacts
-      run: unzip heyhi-life/release.zip -d release
+      run: unzip release.zip -d release
 
     - name: Login to Azure
       uses: azure/login@v1
