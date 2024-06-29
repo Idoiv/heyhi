@@ -79,13 +79,13 @@ jobs:
     - name: Unzip build artifacts
       run: unzip release.zip -d release
 
-    - name: Azure Login with OpenID Connect
+    - name: Azure Login and Deploy to Azure WebApp
       uses: azure/login@v1
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        environment: azurecloud
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
