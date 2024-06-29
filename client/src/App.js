@@ -1,5 +1,6 @@
+// client/src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header'; // Fix the casing of the file name
 import HomePage from './pages/homePage';
 import './App.css';
@@ -9,10 +10,10 @@ function App() {
         <Router>
             <div className="App">
                 <Header />
-                <Switch>
-                    <Route path="/" exact component={HomePage} />
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
                     {/* Add other routes as needed */}
-                </Switch>
+                </Routes>
             </div>
         </Router>
     );

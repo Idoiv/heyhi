@@ -1,5 +1,5 @@
 # Define the base directory
-$baseDir = "C:\Users\t-idoivry\OneDrive - Microsoft\Documents\Private\heyhi\heyhi-life"
+$baseDir = "C:\Users\t-idoivry\OneDrive - Microsoft\Documents\Private\heyhi"
 
 # Install server dependencies
 Write-Output "Installing server dependencies..."
@@ -19,7 +19,8 @@ $reactDependencies = @"
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.0"
+    "react-scripts": "5.0.0",
+    "axios": "^0.21.1"
   }
 }
 "@
@@ -27,15 +28,18 @@ $reactDependencies = @"
 if (-Not (Test-Path "$baseDir\client\package.json")) {
     Set-Content -Path "$baseDir\client\package.json" -Value $reactDependencies
 } else {
-    $packageJson = Get-Content -Path "$baseDir\client\package.json" | Out-String | ConvertFrom-Json
+    $packageJson = Get-Content -Path "$baseDir\client\package.json" -Raw | ConvertFrom-Json
     if (-Not $packageJson.dependencies.react) {
-        $packageJson.dependencies.react = "^18.0.0"
+        $packageJson.dependencies["react"] = "^18.0.0"
     }
-    if (-Not $packageJson.dependencies["react-dom"]) {
+    if (-Not $packageJson.dependencies."react-dom") {
         $packageJson.dependencies["react-dom"] = "^18.0.0"
     }
-    if (-Not $packageJson.dependencies["react-scripts"]) {
+    if (-Not $packageJson.dependencies."react-scripts") {
         $packageJson.dependencies["react-scripts"] = "5.0.0"
+    }
+    if (-Not $packageJson.dependencies."axios") {
+        $packageJson.dependencies["axios"] = "^0.21.1"
     }
     $packageJson | ConvertTo-Json -Depth 10 | Set-Content -Path "$baseDir\client\package.json"
 }
@@ -45,8 +49,9 @@ Write-Output "Installing client dependencies..."
 cd "$baseDir\client"
 npm install
 
-# Build the React application
+# Build the React application with OpenSSL legacy provider
 Write-Output "Building the React application..."
+$env:NODE_OPTIONS="--openssl-legacy-provider"
 npm run build
 
 # Return to the base directory
