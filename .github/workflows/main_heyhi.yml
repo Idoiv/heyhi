@@ -52,17 +52,17 @@ jobs:
 
     - name: Install client dependencies
       run: |
-        cd client
+        cd ../client
         npm install
 
     - name: Build the React application
       run: |
-        cd client
         npm run build
+      working-directory: ../client
 
     - name: Move build artifacts
       run: |
-        mv client/build server/build
+        mv ../client/build ../server/build
 
     - name: Archive build artifacts
       run: |
