@@ -1,8 +1,9 @@
-// client/src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/header'; // Fix the casing of the file name
-import HomePage from './pages/homePage';
+import Header from './components/Header';
+import HomePage from './pages/HomePage';
+import ToolsPage from './pages/ToolsPage';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -10,10 +11,14 @@ function App() {
         <Router>
             <div className="App">
                 <Header />
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    {/* Add other routes as needed */}
-                </Routes>
+                <div className="container mt-5">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/tools" element={<ToolsPage />} />
+                        {/* Add other routes as needed */}
+                    </Routes>
+                </div>
+                <Footer />
             </div>
         </Router>
     );
