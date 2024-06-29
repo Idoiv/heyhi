@@ -77,11 +77,11 @@ jobs:
       with:
         name: node-app
 
-    - name: List downloaded files for debug
+    - name: List files in the workspace directory for debug
       run: ls -la
 
     - name: Unzip build artifacts
-      run: unzip node-app/release.zip -d release
+      run: unzip release.zip -d release
 
     - name: List files after unzipping for debug
       run: ls -la release
