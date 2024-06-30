@@ -1,6 +1,6 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
-import LoginButton from './LoginButton'; // Ensure this import is correct
+import LoginButton from './LoginButton';
 
 const AuthButton = () => {
     const { user, loading } = useAuth();
