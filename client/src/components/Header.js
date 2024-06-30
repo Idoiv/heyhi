@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
-import './Header.css'; // Import CSS
+import AuthButton from './AuthButton';
+import './Header.css';
 
 const Header = () => {
     return (
@@ -13,6 +14,7 @@ const Header = () => {
                     <Nav.Link as={Link} to="/">Home</Nav.Link>
                     {/* Add more links here if needed */}
                 </Nav>
+                <AuthButton />
             </Navbar.Collapse>
         </Navbar>
     );

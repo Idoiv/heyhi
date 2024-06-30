@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createGame, addPlayer, generateTeams, getGame, removePlayer, resetGame } from '../services/GameService';
+import { createGame, addPlayer, generateTeams, removePlayer, resetGame } from '../services/GameServices';
 import './HomePage.css';
 
 const HomePage = () => {

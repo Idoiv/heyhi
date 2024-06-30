@@ -14,32 +14,23 @@ if (-Not (Test-Path "$baseDir\client\package.json")) {
 }
 
 # Ensure React and necessary dependencies are listed in package.json
-$reactDependencies = @"
-{
-  "dependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "5.0.0",
-    "axios": "^0.21.1"
-  }
+$reactDependencies = @{
+    dependencies = @{
+        react = "^18.0.0"
+        "react-dom" = "^18.0.0"
+        "react-scripts" = "5.0.0"
+        axios = "^0.21.1"
+    }
 }
-"@
 
 if (-Not (Test-Path "$baseDir\client\package.json")) {
-    Set-Content -Path "$baseDir\client\package.json" -Value $reactDependencies
+    $reactDependencies | ConvertTo-Json -Depth 10 | Set-Content -Path "$baseDir\client\package.json"
 } else {
     $packageJson = Get-Content -Path "$baseDir\client\package.json" -Raw | ConvertFrom-Json
-    if (-Not $packageJson.dependencies.react) {
-        $packageJson.dependencies["react"] = "^18.0.0"
-    }
-    if (-Not $packageJson.dependencies."react-dom") {
-        $packageJson.dependencies["react-dom"] = "^18.0.0"
-    }
-    if (-Not $packageJson.dependencies."react-scripts") {
-        $packageJson.dependencies["react-scripts"] = "5.0.0"
-    }
-    if (-Not $packageJson.dependencies."axios") {
-        $packageJson.dependencies["axios"] = "^0.21.1"
+    $reactDependencies.dependencies.GetEnumerator() | ForEach-Object {
+        if (-Not $packageJson.dependencies[$_.Key]) {
+            $packageJson.dependencies[$_.Key] = $_.Value
+        }
     }
     $packageJson | ConvertTo-Json -Depth 10 | Set-Content -Path "$baseDir\client\package.json"
 }
