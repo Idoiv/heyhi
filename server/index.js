@@ -7,18 +7,19 @@ const app = express();
 // Connect to database
 connectDB();
 
-// Middleware
-app.use(express.json());
+// Init Middleware
+app.use(express.json({ extended: false }));
 
-// Routes
+// Define Routes
 app.use('/api/games', require('./routes/games'));
 app.use('/api/players', require('./routes/players'));
 
-const PORT = process.env.PORT || 5000;
-
-app.get('/', (req, res) => {
-    res.send('API is running...');
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
 });
+
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
