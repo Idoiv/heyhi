@@ -1,52 +1,29 @@
-/* General Styles */
-body {
-    background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
-}
-
 .App {
-    text-align: center;
-}
-
-/* Header Styles */
-header {
-    margin-bottom: 20px;
-}
-
-/* Card Styles */
-.card {
-    height: 100%;
-    margin-bottom: 20px;
-}
-
-.card-body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
-/* Footer Styles */
-footer {
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.footer {
     background-color: #343a40;
     color: white;
-    padding: 10px 0;
-    position: absolute;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
     bottom: 0;
     width: 100%;
-    text-align: center;
-}
-
-/* ToolsPage Styles */
-.tools-page {
-    padding: 20px 0;
-}
-
-.tools-page h2 {
-    margin-bottom: 20px;
-}
-
-.tools-page .card {
-    flex: 1;
-    margin: 10px;
-    max-width: 300px;
 }

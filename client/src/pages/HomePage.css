@@ -1,55 +1,79 @@
-.homepage {
-    padding: 20px 0;
+.home-page {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
 }
 
-.homepage h2 {
-    margin-bottom: 20px;
+.home-page h1 {
     font-size: 2.5rem;
+    margin-bottom: 20px;
     color: #343a40;
 }
 
-.homepage p {
-    font-size: 1.2rem;
-    color: #6c757d;
+.home-page button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.featured-tools {
+.home-page button:hover {
+    background-color: #0056b3;
+}
+
+.home-page input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.home-page label {
+    display: block;
+    margin: 20px 0;
+}
+
+.home-page ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.home-page ul li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.teams {
     display: flex;
     justify-content: space-around;
-    flex-wrap: wrap;
     margin-top: 20px;
 }
 
-.featured-tools .card {
-    flex: 1;
-    margin: 10px;
-    max-width: 300px;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+.teams div {
+    width: 45%;
 }
 
-.featured-tools .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.featured-tools .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.featured-tools .card-title {
+.teams h3 {
     font-size: 1.5rem;
-    color: #007bff;
+    margin-bottom: 10px;
+    color: #343a40;
 }
 
-.featured-tools .card-text {
-    font-size: 1rem;
-    color: #6c757d;
+.goalkeepers {
+    margin-top: 20px;
 }
 
-.featured-tools .btn {
-    margin-top: 10px;
+.goalkeepers h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #343a40;
 }

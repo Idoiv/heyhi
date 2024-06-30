@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header'; // Ensure the path is correct
-import HomePage from './pages/HomePage';
-import ToolsPage from './pages/ToolsPage';
+import Header from './components/Header'; // Corrected the casing of the file name
 import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
@@ -14,7 +14,6 @@ function App() {
                 <div className="container mt-5">
                     <Routes>
                         <Route path="/" element={<HomePage />} />
-                        <Route path="/tools" element={<ToolsPage />} />
                     </Routes>
                 </div>
                 <Footer />

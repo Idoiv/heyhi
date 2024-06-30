@@ -1,9 +1,12 @@
 import React from 'react';
+import './Footer.css'; // Import CSS
 
 const Footer = () => {
     return (
-        <footer className="bg-dark text-white mt-5 p-4 text-center">
-            &copy; {new Date().getFullYear()} AI Tools Hub. All Rights Reserved.
+        <footer className="footer">
+            <div className="container">
+                <span>&copy; {new Date().getFullYear()} Soccer Game Organizer. All Rights Reserved.</span>
+            </div>
         </footer>
     );
 }
